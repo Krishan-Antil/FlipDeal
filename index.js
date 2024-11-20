@@ -10,6 +10,7 @@ const port = 3000;
 
 let express = require("express");
 let cors = require("cors");
+const res = require('express/lib/response');
 
 let app = express();
 app.use(cors());
@@ -24,6 +25,18 @@ app.get('/cart-total', (req, res) => {
   let cartTotal = parseFloat(req.query.cartTotal);
   let cartTotalFinal = cartTotal + newItemPrice;
   res.send(cartTotalFinal.toString());
+});
+
+app.get('/membership-discount', (req, res) => {
+  let cartTotal = parseFloat(req.query.cartTotal);
+  let isMember = (req.query.isMember === 'true');
+  let discountedPrice;
+  if (isMember) {
+    discountedPrice = cartTotal - ((cartTotal * discountPercentage) / 100);
+  } else {
+    discountedPrice = cartTotal;
+  }
+  res.send(discountedPrice.toString());
 });
 
 
