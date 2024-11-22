@@ -60,6 +60,21 @@ app.get('/estimate-delivery', (req, res) => {
   res.send(estimateDeliveryTime.toString())
 });
 
+app.get('/shipping-cost', (req,res) => {
+  let weight = parseFloat(req.query.weight);
+  let distance = parseFloat(req.query.distance);
+  let shippingCost = (weight * distance * 0.1)
+  res.send(shippingCost.toString());
+});
+
+app.get('/loyalty-points', (req, res) => {
+  let purchaseAmount = parseFloat(req.query.purchaseAmount);
+  let loyaltyPoints = purchaseAmount * loyaltyRate;
+  res.send(loyaltyPoints.toString());   
+});
+
+
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
