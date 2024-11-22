@@ -39,8 +39,17 @@ app.get('/membership-discount', (req, res) => {
   res.send(discountedPrice.toString());
 });
 
+app.get('/calculate-tax', (req, res) => {
+  let cartTotal = parseFloat(req.query.cartTotal);
+  let Tax;
+  Tax = ((cartTotal * taxRate) /100);
 
+  res.send(Tax.toString());
+
+});
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
+
+
