@@ -48,6 +48,18 @@ app.get('/calculate-tax', (req, res) => {
 
 });
 
+app.get('/estimate-delivery', (req, res) => {
+  let shippingMethod = req.query.shippingMethod;
+  let distance = parseFloat(req.query.distance);
+  let estimateDeliveryTime;
+  if (shippingMethod === 'Standard') {
+    estimateDeliveryTime = distance / 50;
+  } else {
+    estimateDeliveryTime = distance / 100;
+  }
+  res.send(estimateDeliveryTime.toString())
+});
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
